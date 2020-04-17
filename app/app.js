@@ -1,9 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
-import ConnectedLayout from './components/connected-layout/ConnectedLayout';
+import AppLayout from './components/layout/AppLayout';
+import { injectGlobal } from 'emotion';
+
+injectGlobal({
+  body: {
+    margin: '0',
+    backgroundColor: '#eee'
+  },
+  div: {
+    display: 'flex'
+  }
+})
 
 const App = () => (
-  <ConnectedLayout />
+  <AppLayout />
 );
 
 render(<App />, document.getElementById('application-root'));

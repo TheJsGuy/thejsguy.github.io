@@ -30,7 +30,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './app/index.html',
-      filename: './index.html'
+      filename: '../index.html'
     })
   ],
   mode: 'development'
