@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
 const pageStyles = css`
-    background-color: #3f51b5;
+    background-color: #272c35;
     width: 60rem;
     max-width: 100%;
     align-self: center;
@@ -12,7 +12,7 @@ const pageStyles = css`
     padding: 2.5rem 1.25rem;
     flex-direction: column;
     min-height: calc(100vh - 5rem);
-    color: #fff;
+    color: #e2e2e2;
 `;
 
 const Page = ({ children }) => (

@@ -9,6 +9,7 @@ const headerStyles = css`
         font-size: 2.75rem;
         line-height: 1.75;
         margin-top: 0;
+        z-index: 1;
     }
     .code {
         position: absolute;
@@ -16,7 +17,8 @@ const headerStyles = css`
         top: 1rem;
         z-index: 0;
         font-size: 11rem;
-        color: #3949AB;
+        color: #3e444e;
+        z-index: 0;
     }
 `;
 
