@@ -3,6 +3,9 @@ import Header from './Header';
 import Page from './Page';
 import Section, { SubSeciton } from './Section';
 
+/*
+ * home page
+ */
 const AppLayout = () => (
   <Page>
     <Header />
