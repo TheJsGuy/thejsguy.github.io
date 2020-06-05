@@ -57,13 +57,13 @@ export const SubSeciton = ({ title, content }) => (
 
 
 SubSeciton.propTypes = {
-    title: PropTypes.element.isRequired,
-    content: PropTypes.element.isRequired
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired
 };
 
 Section.propTypes = {
-    title: PropTypes.element.isRequired,
-    content: PropTypes.element.isRequired
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired
 };
 
 export default Section;

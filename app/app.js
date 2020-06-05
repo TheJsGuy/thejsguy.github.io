@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import AppLayout from './components/layout/AppLayout';
 import { injectGlobal } from 'emotion';
+import { ApplicationRoutes } from './routes/AppRoutes';
 
 injectGlobal({
   body: {
@@ -14,7 +14,7 @@ injectGlobal({
 })
 
 const App = () => (
-  <AppLayout />
+  <ApplicationRoutes />
 );
 
 render(<App />, document.getElementById('application-root'));
