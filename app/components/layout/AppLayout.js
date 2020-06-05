@@ -84,7 +84,7 @@ const AppLayout = () => (
     />
 
     <div>
-      Built with ❤️using React
+      Built with ❤️ using React
     </div>
   </Page>
 );
