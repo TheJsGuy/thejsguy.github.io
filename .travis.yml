@@ -7,5 +7,8 @@ cache:
 script:
   - yarn test
   - yarn build
+  - git add .
+  - git commit -m "build: travis-ci"
+  - git push origin master
 on:
   branch: master
