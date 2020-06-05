@@ -27,12 +27,18 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    historyApiFallback: {
+      index: 'index.html'
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './app/index.html',
-      filename: '../index.html'
+      filename: 'index.html',
+      minify: true,
+      hash: true,
+      base: '/'
     })
   ],
   mode: 'development'

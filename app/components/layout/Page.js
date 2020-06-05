@@ -20,7 +20,7 @@ const Page = ({ children }) => (
 );
 
 Page.propTypes = {
-    children: PropTypes.element
+    children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.array]).isRequired
 }
 
 
