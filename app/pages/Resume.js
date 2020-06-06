@@ -9,9 +9,13 @@ export const Resume = () => (
         <Header />
         <Section
             title={'Technologies I Use'}
-            content={`HTML5, CSS3, JS, jQuery, Angular, React, React Native, AngularJS,
-      Knockout.JS, Durandal.JS, Webpack, Rollup.JS, Node.JS, Express.JS,
-      Restify.JS, D3.JS, Java, PHP, MongoDB, SQL, GraphQL, MobX, PWA`}
+            content={(
+                <p>
+                    HTML5, CSS3, JS, jQuery, Angular, React, React Native, AngularJS,
+                    Knockout.JS, Durandal.JS, Webpack, Rollup.JS, Node.JS, Express.JS,
+                    Restify.JS, D3.JS, Java, PHP, MongoDB, SQL, GraphQL, MobX, PWA
+                </p>
+            )}
         />
 
         <Section
