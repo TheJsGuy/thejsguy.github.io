@@ -1,13 +1,34 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
+const { NODE_ENV = 'development' } = process.env;
 
 module.exports = {
+  mode: NODE_ENV,
+  optimization: {
+    usedExports: NODE_ENV === 'development',
+    minimize: NODE_ENV !== 'development',
+    minimizer: NODE_ENV !== 'development' ? [new TerserPlugin({
+      extractComments: 'all'
+    })] : undefined,
+    splitChunks: {
+      name: 'vendor',
+      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all'
+        }
+      }
+    }
+  },
   entry: {
-    main: './app/app.js'
+    app: ['./app/app.js'],
+    vendor: ['react', 'react-dom', 'react-router-dom', 'emotion'],
   },
   output: {
     path: path.resolve('dist'),
-    filename: 'main.bundle.js'
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
@@ -15,7 +36,7 @@ module.exports = {
         test: /\.js/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         }
       },
       {
@@ -34,8 +55,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './app/index.html',
-      filename: 'index.html',
+      template: path.join(__dirname, 'app', 'index.html'),
+      filename: getHtmlFilePath(),
       minify: true,
       hash: true,
       base: '/'
@@ -43,3 +64,7 @@ module.exports = {
   ],
   mode: 'development'
 };
+
+function getHtmlFilePath() {
+  return NODE_ENV === 'development' ? 'index.html' : path.join(__dirname, 'index.html');
+}
