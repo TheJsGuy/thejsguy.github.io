@@ -10,6 +10,15 @@ injectGlobal({
   },
   div: {
     display: 'flex'
+  },
+  h1: {
+    fontSize: '1.5rem'
+  },
+  h2: {
+    fontSize: '1.25rem'
+  },
+  h3: {
+    fontSize: '1rem'
   }
 })
 

@@ -6,12 +6,17 @@ const headerStyles = css`
     flex-direction: column;
     position: relative;
     h1 {
-        font-size: 2.75rem;
+        @media only screen and (min-width: 767px) {
+            font-size: 2.75rem;
+        }
         line-height: 1.75;
         margin-top: 0;
         z-index: 1;
     }
     .code {
+        @media only screen and (max-width: 768px) {
+            font-size: 5rem;
+        }
         position: absolute;
         right: 1rem;
         top: 1rem;
