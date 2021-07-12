@@ -1,29 +1,28 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { injectGlobal } from 'emotion';
-import { ApplicationRoutes } from './routes/AppRoutes';
+import React from "react";
+import { render } from "react-dom";
+import { injectGlobal } from "emotion";
+import { ApplicationRoutes } from "./routes/AppRoutes";
 
 injectGlobal({
   body: {
-    margin: '0',
-    backgroundColor: '#eee'
+    margin: "0",
+    backgroundColor: "#eee",
+    color: "#fff"
   },
   div: {
-    display: 'flex'
+    display: "flex"
   },
   h1: {
-    fontSize: '1.5rem'
+    fontSize: "1.5rem"
   },
   h2: {
-    fontSize: '1.25rem'
+    fontSize: "1.25rem"
   },
   h3: {
-    fontSize: '1rem'
+    fontSize: "1rem"
   }
-})
+});
 
-const App = () => (
-  <ApplicationRoutes />
-);
+const App = () => <ApplicationRoutes />;
 
-render(<App />, document.getElementById('application-root'));
+render(<App />, document.getElementById("application-root"));
