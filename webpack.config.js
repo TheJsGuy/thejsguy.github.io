@@ -1,70 +1,48 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
-const { NODE_ENV = 'development' } = process.env;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: NODE_ENV,
-  optimization: {
-    usedExports: NODE_ENV === 'development',
-    minimize: NODE_ENV !== 'development',
-    minimizer: NODE_ENV !== 'development' ? [new TerserPlugin({
-      extractComments: 'all'
-    })] : undefined,
-    splitChunks: {
-      name: 'vendor',
-      chunks: 'all',
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all'
-        }
-      }
-    }
-  },
-  entry: {
-    app: ['./app/app.js'],
-    vendor: ['react', 'react-dom', 'react-router-dom', 'emotion'],
-  },
-  output: {
-    path: path.resolve('dist'),
-    filename: '[name].bundle.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-        }
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: {
-          loader: 'file-loader'
-        }
-      }
-    ]
-  },
-  devServer: {
-    contentBase: './dist',
-    historyApiFallback: {
-      index: 'index.html'
-    }
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'app', 'index.html'),
-      filename: getHtmlFilePath(),
-      minify: true,
-      hash: true,
-      base: '/'
-    })
-  ],
-  mode: 'development'
+    entry: {
+        app: './src/App.js'
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'app.bundle.js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /nodeModules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.mdx?$/,
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    },
+                    {
+                        loader: '@mdx-js/loader',
+                        options: {}
+                    }
+                ]
+            }
+        ]
+    },
+    devServer: {
+        port: 3000
+    },
+    plugins: [
+        new HtmlWebpackPlugin({ template: './templates/index.html' }),
+        new MiniCssExtractPlugin()
+    ],
+    mode: 'development'
 };
-
-function getHtmlFilePath() {
-  return NODE_ENV === 'development' ? 'index.html' : path.join(__dirname, 'index.html');
-}
