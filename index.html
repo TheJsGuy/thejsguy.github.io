@@ -24,12 +24,11 @@
 <body>
   <div id="__root"></div>
 <script defer src="app.bundle.js"></script><script>
-                        window.onload = () => 
-                            window.runApp({
+                        window.config = {
                                 nav: {
                                     links: [{"label":"about me","key":"aboutMe"},{"label":"problem solving","children":[{"label":"reverse string","key":"reverseString"}],"key":"problemSolving"},{"label":"react","children":[{"label":"application setup","key":"applicationSetup"}],"key":"react"}]
                                 }
-                            })
+                            };
                         </script></body>
 
 </html>
