@@ -24,4 +24,4 @@ const App = ({ config }) => {
     );
 }
 
-window.runApp = config => ReactDOM.render(<App config={config} />, document.getElementById('__root'));
+ReactDOM.render(<App config={window.config} />, document.getElementById('__root'));

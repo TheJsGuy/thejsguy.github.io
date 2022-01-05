@@ -55,12 +55,11 @@ class RuntimeContentConfigPlugin {
                             plugin: 'RuntimeContentConfigPlugin'
                         },
                         innerHTML: `
-                        window.onload = () => 
-                            window.runApp({
+                        window.config = {
                                 nav: {
                                     links: ${JSON.stringify(nav)}
                                 }
-                            })
+                            };
                         `
                     })
                     callback(null, data)
