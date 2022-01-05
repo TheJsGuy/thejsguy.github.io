@@ -1,19 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Layout } from './components/Layout';
 import { MDXProvider } from '@mdx-js/react';
+import { Layout } from './components/Layout';
+import { lib } from './components/md-lib';
+import { AppConfigContextProvider } from './context/app-config-context';
+
 import './styles/styles.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const mdxComponents = {
-    h1: ({children}) => <h1 className="text-2xl">{children}</h1>
+    ...lib
 };
 
-const App = () => {
+const App = ({ config }) => {
     return (
-        <MDXProvider components={mdxComponents} >
-            <Layout />
-        </MDXProvider>
+        <BrowserRouter>
+            <AppConfigContextProvider config={config}>
+                <MDXProvider components={mdxComponents} >
+                    <Layout />
+                </MDXProvider>
+            </AppConfigContextProvider>
+        </BrowserRouter>
     );
 }
 
-ReactDOM.render(<App />, document.getElementById('__root'));
+window.runApp = config => ReactDOM.render(<App config={config} />, document.getElementById('__root'));

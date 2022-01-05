@@ -14,7 +14,8 @@
   "dependencies": {
     "@mdx-js/react": "^1.6.22",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
@@ -24,6 +25,7 @@
     "autoprefixer": "^10.4.1",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
+    "directory-tree": "^3.0.1",
     "file-loader": "^6.2.0",
     "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^5.5.0",

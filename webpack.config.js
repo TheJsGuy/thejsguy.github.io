@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { join } = require('path');
+const RuntimeContentConfigPlugin = require('./webpack/plugins/runtime-content-config-plugin');
 
 module.exports = {
     entry: {
@@ -38,11 +40,13 @@ module.exports = {
         ]
     },
     devServer: {
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './templates/index.html' }),
-        new MiniCssExtractPlugin()
+        new HtmlWebpackPlugin({ template: './templates/index.html', inject: 'body' }),
+        new MiniCssExtractPlugin(),
+        new RuntimeContentConfigPlugin({ contentPath: join(__dirname, 'src', 'content') })
     ],
     mode: 'development'
 };
