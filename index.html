@@ -1,12 +1,13 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Github</title>
 
-    <!-- remove this later -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello Github</title>
+
+  <!-- remove this later -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
           theme: {
@@ -17,9 +18,18 @@
             }
           }
         }
-      </script>
-<script defer src="app.bundle.js"></script><link href="app.css" rel="stylesheet"></head>
+      </script> -->
+<link href="app.css" rel="stylesheet"></head>
+
 <body>
-    <div id="__root"></div>
-</body>
+  <div id="__root"></div>
+<script defer src="app.bundle.js"></script><script>
+                        window.onload = () => 
+                            window.runApp({
+                                nav: {
+                                    links: [{"label":"about me","key":"aboutMe"},{"label":"problem solving","children":[{"label":"reverse string","key":"reverseString"}],"key":"problemSolving"},{"label":"react","children":[{"label":"application setup","key":"applicationSetup"}],"key":"react"}]
+                                }
+                            })
+                        </script></body>
+
 </html>
