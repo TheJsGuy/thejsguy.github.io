@@ -8,6 +8,7 @@
     "start": "webpack-dev-server",
     "build": "yarn build:css && webpack",
     "build:css": "postcss src/styles/tailwind.css > src/styles/styles.css",
+    "predeploy": "cp templates/404.html dist/",
     "deploy": "gh-pages -d dist"
   },
   "license": "MIT",
