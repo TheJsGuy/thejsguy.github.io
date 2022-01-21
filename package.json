@@ -6,7 +6,7 @@
   "author": "Saini, Aman Kumar <amankumarsaini28@gmail.com>",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack",
+    "build": "yarn build:css && webpack",
     "build:css": "postcss src/styles/tailwind.css > src/styles/styles.css",
     "deploy": "gh-pages -d dist"
   },

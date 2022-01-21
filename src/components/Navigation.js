@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useAppConfig } from '../context/app-config-context';
 
 const NavItem = ({ link, noLink, children, route, className }) => (
     noLink
         ? <li><a className={`flex w-full px-4 py-2 uppercase text-sm mt-4 ${className || ''}`}>{link.label}</a>{children}</li>
-        : <li><Link to={route} className={`flex w-full px-4 py-2 uppercase hover:bg-purple-400 ${className || ''}`}>{link.label}</Link>{children}</li>
+        : <li><NavLink to={route} className={({isActive}) => `flex w-full px-4 py-2 uppercase hover:bg-purple-400 ${className || ''} ${isActive ? 'bg-purple-400' : ''}`}>{link.label}</NavLink>{children}</li>
 
 );
 
