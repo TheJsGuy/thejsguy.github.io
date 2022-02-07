@@ -8,10 +8,10 @@ function main(context) {${code}}`;
 const run = (code, inputs) => {
   let logs = "";
   const log = (...messages) =>
-  (logs += (messages.reduce(
+  (logs += '\nthejsguy.github.io > ' + (messages.reduce(
     (coll, message) => `${coll} ${JSON.stringify(message)}`,
     ""
-  )) + '\n');
+  )) + '');
   try {
     const execute = Function("context", code);
     const execution = execute({ log, inputs });
@@ -52,24 +52,39 @@ export const CodeRunner = ({ code, inputs = {} }) => {
         <textarea
           onChange={onInputChange}
           onBlur={onInputBlur}
-          className={`flex w-10/12 mt-2 border-2 border-slate-700 rounded border-solid outline-0 focus:outline-2 focus:outline-slate-500 ${inputHasError && 'border-rose-700 focus:outline-rose-500'}`}
+          className={`flex px-2 py-1 w-10/12 mt-2 border-2 border-slate-700 rounded border-solid outline-0 focus:outline-2 focus:outline-slate-500 ${inputHasError && 'border-rose-700 focus:outline-rose-500'}`}
           value={input}
         >
         </textarea>
         {inputHasError && <span className="text-rose-700">Invalid JSON</span>}
       </div>
       <div className="mt-5">
-        <label className="font-semibold">Code <button
-          className="bg-slate-600 hover:bg-slate-500 px-2 py-1 text-white rounded cursor-pointer"
-          onClick={evaluate}
-        >
-          Run
-        </button></label>
-        <pre className="bg-slate-700 text-white mt-2 px-4 py-2">{codeWrapper(code)}</pre>
+        <div className="font-semibold flex flex-row justify-between">
+          <div>Code</div>
+          <div>
+            <button
+              className="bg-stone-600 hover:bg-slate-500 px-2 py-1 text-white rounded cursor-pointer align"
+              onClick={evaluate}
+            >
+              Run
+            </button>
+          </div>
+        </div>
+        <pre className="bg-stone-100 px-4 py-2 pt-6 mt-4 relative">
+          <span className="absolute top-0 right-0 py-1 px-3 bg-stone-300">JavaScript</span>
+          <code className="text-sm">
+            {codeWrapper(code)}
+          </code>
+        </pre>
       </div>
       <div className="mt-5">
-        <label>Output</label>
-        <pre className="bg-slate-700 text-white mt-2 px-4 py-2">{output}</pre>
+        <label className="font-semibold">Output</label>
+        <pre className="bg-stone-100 px-4 py-2 pt-6 mt-4 relative">
+          <span className="absolute top-0 right-0 py-1 px-3 bg-stone-300">Web Shell</span>
+          <code className="text-sm">
+            {output}
+          </code>
+        </pre>
       </div>
     </div>
   );

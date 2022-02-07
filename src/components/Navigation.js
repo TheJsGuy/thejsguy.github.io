@@ -5,7 +5,7 @@ import { useAppConfig } from '../context/app-config-context';
 const NavItem = ({ link, noLink, children, route, className }) => (
     noLink
         ? <li><a className={`flex w-full px-4 py-2 uppercase text-sm mt-4 ${className || ''}`}>{link.label}</a>{children}</li>
-        : <li><NavLink to={route} className={({isActive}) => `flex w-full px-4 py-2 uppercase hover:bg-purple-400 ${className || ''} ${isActive ? 'bg-purple-400' : ''}`}>{link.label}</NavLink>{children}</li>
+        : <li><NavLink to={route} className={({isActive}) => `flex w-full px-4 py-2 uppercase hover:bg-zinc-400 ${className || ''} ${isActive ? 'bg-zinc-400' : ''}`}>{link.label}</NavLink>{children}</li>
 
 );
 
