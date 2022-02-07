@@ -1,0 +1,40 @@
+import { CodeRunner } from "../../components/md-lib/CodeRunner";
+
+### Generate Parentheses
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+Example 1:
+```
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+```
+
+Example 2:
+```
+Input: n = 1
+Output: ["()"]
+```
+
+Solution
+>
+<CodeRunner
+  code={`
+    const generateParenthesis = n => {
+      const results = [];
+      const backtrack = (parenthesis, opening, closing) => {
+        if (parenthesis.length === 2*n) {
+          results.push(parenthesis);
+          return;
+        }
+        if (opening < n) {
+          backtrack(parenthesis + '(', opening + 1, closing);
+        }
+        if (closing < opening) {
+          backtrack(parenthesis + ')', opening, closing + 1)
+        }
+      }
+      backtrack('', 0, 0);
+      return results;
+    }
+    context.log(generateParenthesis(3));
+`}
+/>

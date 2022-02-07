@@ -9,7 +9,7 @@
     "build": "yarn build:css && webpack",
     "watch:css": "postcss --watch src/styles/tailwind.css -o src/styles/output.css",
     "build:css": "postcss src/styles/tailwind.css -o src/styles/output.css",
-    "predeploy": "cp templates/404.html dist/",
+    "predeploy": "yarn build && cp templates/404.html dist/",
     "deploy": "gh-pages -d dist"
   },
   "license": "MIT",

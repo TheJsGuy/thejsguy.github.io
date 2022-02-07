@@ -4,12 +4,14 @@ import { useAppConfig } from '../context/app-config-context';
 
 import AboutMe from '../content/about-me.mdx';
 import ApplicationSetup from '../content/react/application-setup.mdx';
-import MediumProblems from '../content/problem-solving/medium-problems.mdx';
+import Test from '../content/problem-solving/test.mdx';
+import GenerateParenthesis from '../content/problem-solving/generate-parenthesis.mdx';
 
 const contentFactory = {
     aboutMe: AboutMe,
     applicationSetup: ApplicationSetup,
-    mediumProblems: MediumProblems
+    test: Test,
+    generateParenthesis: GenerateParenthesis
 };
 
 const Default = () => {
