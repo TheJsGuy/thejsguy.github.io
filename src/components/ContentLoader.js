@@ -3,13 +3,13 @@ import { Route, Routes, useNavigate } from 'react-router';
 import { useAppConfig } from '../context/app-config-context';
 
 import AboutMe from '../content/about-me.mdx';
-import ReverseString from '../content/problem-solving/reverse-string.mdx';
 import ApplicationSetup from '../content/react/application-setup.mdx';
+import MediumProblems from '../content/problem-solving/medium-problems.mdx';
 
 const contentFactory = {
     aboutMe: AboutMe,
-    reverseString: ReverseString,
-    applicationSetup: ApplicationSetup
+    applicationSetup: ApplicationSetup,
+    mediumProblems: MediumProblems
 };
 
 const Default = () => {

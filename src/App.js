@@ -5,7 +5,7 @@ import { Layout } from './components/Layout';
 import { lib } from './components/md-lib';
 import { AppConfigContextProvider } from './context/app-config-context';
 
-import './styles/styles.css';
+import './styles/output.css';
 import { BrowserRouter } from 'react-router-dom';
 
 const mdxComponents = {
