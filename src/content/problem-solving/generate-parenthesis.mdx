@@ -1,6 +1,9 @@
 import { CodeRunner } from "../../components/md-lib/CodeRunner";
 
-### Generate Parentheses
+# Generate Parentheses
+
+## Problem
+
 Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 Example 1:
 ```
@@ -13,10 +16,12 @@ Example 2:
 Input: n = 1
 Output: ["()"]
 ```
-
-Solution
+----
+----
+# Solution
 
 <CodeRunner
+  inputs={{count: 3}}
   code={`
     const generateParenthesis = n => {
       const results = [];
@@ -35,6 +40,6 @@ Solution
       backtrack('', 0, 0);
       return results;
     }
-    context.log(generateParenthesis(3));
+    context.log(generateParenthesis(context.inputs.count));
 `}
 />
