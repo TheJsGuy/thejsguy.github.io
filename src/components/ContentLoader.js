@@ -5,19 +5,19 @@ import { useAppConfig } from '../context/app-config-context';
 import AboutMe from '../content/about-me.mdx';
 import ApplicationSetup from '../content/react/application-setup.mdx';
 import Test from '../content/problem-solving/test.mdx';
-import GenerateParenthesis from '../content/problem-solving/generate-parenthesis.mdx';
+import GenerateParentheses from '../content/problem-solving/generate-parentheses.mdx';
 
 const contentFactory = {
-    aboutMe: AboutMe,
-    applicationSetup: ApplicationSetup,
+    'about-me': AboutMe,
+    'application-setup': ApplicationSetup,
     test: Test,
-    generateParenthesis: GenerateParenthesis
+    'generate-parentheses': GenerateParentheses
 };
 
 const Default = () => {
     let navigate = useNavigate();
     useEffect(() => {
-        navigate('aboutMe')
+        navigate('about-me')
     })
     return <br />;
 }

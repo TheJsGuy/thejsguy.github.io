@@ -3,6 +3,7 @@ import { ContentLoader } from './ContentLoader';
 import { Navigation } from './Navigation';
 import { MenuIcon } from '@heroicons/react/solid';
 import { useLocation } from 'react-router-dom';
+import { theme } from '../config/theme';
 
 export const Layout = () => {
     const [hide, setHide] = useState(true);
@@ -24,7 +25,7 @@ export const Layout = () => {
             <section className="flex flex-grow h-full p-8 flex-col overflow-y-auto overflow-x-clip">
                 <button
                     onClick={toggle}
-                    className="fixed min-w-[40px] min-h-[40px] right-10 top-8 z-10 border-solid border-2 px-1 rounded md:hidden"
+                    className="fixed min-w-[40px] min-h-[40px] right-10 top-8 z-10 border-solid border-2 px-1 rounded md:hidden bg-zinc-50"
                 >
                     <MenuIcon />
                 </button>

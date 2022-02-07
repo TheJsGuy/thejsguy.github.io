@@ -1,9 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const directoryTree = require('directory-tree');
 
-const camelCase = input => {
+const dashCase = input => {
     return input.toLowerCase().replace(/\s(.)/g, function (match, group1) {
-        return group1.toUpperCase();
+        return '-' + group1;
     });
 }
 
@@ -24,13 +24,13 @@ const buildNav = tree => {
             return {
                 label,
                 children: buildNav(item),
-                key: camelCase(label)
+                key: dashCase(label)
             };
         }
         const label = extractFileName(item.name);
         return {
             label,
-            key: camelCase(label)
+            key: dashCase(label)
         };
     })
 }

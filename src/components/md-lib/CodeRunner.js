@@ -70,7 +70,7 @@ export const CodeRunner = ({ code, inputs = {} }) => {
             </button>
           </div>
         </div>
-        <pre className="bg-stone-100 px-4 py-2 pt-6 mt-4 relative">
+        <pre className="bg-stone-100 px-4 py-2 pt-6 relative">
           <span className="absolute top-0 right-0 py-1 px-3 bg-stone-300">JavaScript</span>
           <code className="text-sm whitespace-pre-wrap">
             {codeWrapper(code)}
@@ -79,7 +79,7 @@ export const CodeRunner = ({ code, inputs = {} }) => {
       </div>
       <div className="mt-5">
         <label className="font-semibold">Output</label>
-        <pre className="bg-stone-100 px-4 py-2 pt-6 mt-4 relative">
+        <pre className="bg-stone-100 px-4 py-2 pt-6 relative">
           <span className="absolute top-0 right-0 py-1 px-3 bg-stone-300">Web Shell</span>
           <code className="text-sm whitespace-pre-wrap">
             {output}

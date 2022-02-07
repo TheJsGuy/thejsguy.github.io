@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { theme } from '../config/theme';
 import { useAppConfig } from '../context/app-config-context';
 
 const NavItem = ({ link, noLink, children, route, className }) => (
