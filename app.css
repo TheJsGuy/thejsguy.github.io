@@ -1,3 +1,6 @@
+/*!*************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/output.css ***!
+  \*************************************************************************/
 html {
   font-size: 14px;
 }
@@ -368,11 +371,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-80 {
   width: 20rem;
 }
+.w-10 {
+  width: 2.5rem;
+}
+.w-10\/12 {
+  width: 83.333333%;
+}
 .flex-grow-0 {
   flex-grow: 0;
 }
 .flex-grow {
   flex-grow: 1;
+}
+.border-collapse {
+  border-collapse: collapse;
 }
 .cursor-pointer {
   cursor: pointer;
@@ -404,8 +416,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded {
   border-radius: 0.25rem;
 }
+.border {
+  border-width: 1px;
+}
+.border-2 {
+  border-width: 2px;
+}
 .border-l-4 {
   border-left-width: 4px;
+}
+.border-solid {
+  border-style: solid;
 }
 .border-none {
   border-style: none;
@@ -413,6 +434,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-purple-300 {
   --tw-border-opacity: 1;
   border-color: rgb(216 180 254 / var(--tw-border-opacity));
+}
+.border-slate-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(51 65 85 / var(--tw-border-opacity));
+}
+.border-rose-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(190 18 60 / var(--tw-border-opacity));
 }
 .bg-purple-300 {
   --tw-bg-opacity: 1;
@@ -522,6 +551,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+.text-rose-700 {
+  --tw-text-opacity: 1;
+  color: rgb(190 18 60 / var(--tw-text-opacity));
+}
+.outline-2 {
+  outline-width: 2px;
+}
+.outline-0 {
+  outline-width: 0px;
+}
 .hover\:bg-purple-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(192 132 252 / var(--tw-bg-opacity));
@@ -529,4 +568,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:bg-slate-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+}
+.focus\:outline-2:focus {
+  outline-width: 2px;
+}
+.focus\:outline-slate-500:focus {
+  outline-color: #64748b;
+}
+.focus\:outline-rose-500:focus {
+  outline-color: #f43f5e;
 }
