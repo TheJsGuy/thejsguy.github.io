@@ -45,7 +45,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({ template: './templates/index.html', inject: 'body' }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({ filename: 'app.[hash].css' }),
         new RuntimeContentConfigPlugin({ contentPath: join(__dirname, 'src', 'content') })
     ],
     mode: 'development'

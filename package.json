@@ -8,7 +8,7 @@
     "start": "yarn watch:css | webpack-dev-server",
     "build": "webpack",
     "watch:css": "postcss --watch src/styles/tailwind.css -o src/styles/output.css",
-    "build:css": "postcss src/styles/tailwind.css -o src/styles/output.css",
+    "build:css": "postcss src/styles/tailwind.css > src/styles/output.css",
     "predeploy": "yarn build && cp templates/404.html dist/",
     "deploy": "gh-pages -d dist"
   },
