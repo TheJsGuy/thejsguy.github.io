@@ -321,6 +321,39 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
+.container{
+  width: 100%;
+}
+@media (min-width: 640px){
+
+  .container{
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px){
+
+  .container{
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px){
+
+  .container{
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px){
+
+  .container{
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px){
+
+  .container{
+    max-width: 1536px;
+  }
+}
 .fixed{
   position: fixed;
 }
@@ -391,6 +424,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-full{
   height: 100%;
 }
+.h-auto{
+  height: auto;
+}
+.h-96{
+  height: 24rem;
+}
+.h-max{
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
 .min-h-\[40px\]{
   min-height: 40px;
 }
@@ -432,6 +476,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .justify-between{
   justify-content: space-between;
+}
+.overflow-auto{
+  overflow: auto;
 }
 .overflow-y-auto{
   overflow-y: auto;
@@ -564,9 +611,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1.5rem;
   line-height: 2rem;
 }
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
 }
 .text-3xl{
   font-size: 1.875rem;
@@ -584,25 +631,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1rem;
   line-height: 1.5rem;
 }
-.text-6xl{
-  font-size: 3.75rem;
-  line-height: 1;
-}
-.text-5xl{
-  font-size: 3rem;
-  line-height: 1;
-}
 .font-semibold{
   font-weight: 600;
 }
-.font-light{
-  font-weight: 300;
-}
 .font-medium{
   font-weight: 500;
-}
-.font-extralight{
-  font-weight: 200;
 }
 .uppercase{
   text-transform: uppercase;
