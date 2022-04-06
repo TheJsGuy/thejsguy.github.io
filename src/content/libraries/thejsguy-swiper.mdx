@@ -1,0 +1,172 @@
+import { TheJsGuySwiper } from '../../components/libs/TheJsGuySwiper';
+
+# Vanilla JS Swiper Library
+
+## Sample Output
+
+<TheJsGuySwiper />
+
+---
+
+## Library Code
+```JS
+
+const debounce = (callback, wait, immediate) => {
+  let timeout;
+
+  return (...args) => {
+    const later = () => {
+      timeout = null;
+      if (!immediate) callback(...args);
+    };
+
+    const callNow = immediate && !timeout;
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+    if (callNow) callback(...args);
+  };
+};
+
+const createSwipeEvent = (direction) =>
+  new CustomEvent("@thejsguy:swipe", { detail: { direction } });
+
+const detectSwipe = (element) => {
+  let detect = {
+    startX: 0,
+    startY: 0,
+    endX: 0,
+    endY: 0,
+    minX: 30, // min X swipe for horizontal swipe
+    maxX: 30, // max X difference for vertical swipe
+    minY: 50, // min Y swipe for vertial swipe
+    maxY: 60, // max Y difference for horizontal swipe
+  };
+  let direction;
+
+  let initialiseDetect = () => {
+    detect = {
+      startX: 0,
+      startY: 0,
+      endX: 0,
+      endY: 0,
+      minX: 30,
+      maxX: 30,
+      minY: 50,
+      maxY: 60,
+    };
+  };
+
+  let initialiseDirection = () => {
+    direction = undefined;
+  };
+
+  const debouncedCallback = debounce((direction) => {
+    document.dispatchEvent(createSwipeEvent(direction));
+  }, 50);
+
+  const onTouchStart = (event) => {
+    const [touch] = event.touches;
+    detect.startX = touch.screenX;
+    detect.startY = touch.screenY;
+  };
+
+  const onTouchMove = (event) => {
+    event.preventDefault();
+    const [touch] = event.touches;
+    detect.endX = touch.screenX;
+    detect.endY = touch.screenY;
+  };
+
+  const onTouchEnd = (event) => {
+    if (
+      // Horizontal move.
+      Math.abs(detect.endX - detect.startX) > detect.minX &&
+      Math.abs(detect.endY - detect.startY) < detect.maxY
+    ) {
+      direction = detect.endX > detect.startX ? "right" : "left";
+    } else if (
+      // Vertical move.
+      Math.abs(detect.endY - detect.startY) > detect.minY &&
+      Math.abs(detect.endX - detect.startX) < detect.maxX
+    ) {
+      direction = detect.endY > detect.startY ? "down" : "up";
+    }
+
+    if (direction && typeof debouncedCallback === "function") {
+      debouncedCallback(direction);
+    }
+  };
+
+  return {
+    startSwiper: () => {
+      initialiseDetect();
+      initialiseDirection();
+      element.addEventListener("touchstart", onTouchStart);
+      element.addEventListener("touchmove", onTouchMove);
+      element.addEventListener("touchend", onTouchEnd);
+    },
+    stopSwiper: () => {
+      element.removeEventListener("touchstart", onTouchStart);
+      element.removeEventListener("touchmove", onTouchMove);
+      element.removeEventListener("touchend", onTouchEnd);
+    },
+  };
+};
+```
+
+## React Implementation
+```react-jsx
+
+const swiper = detectSwipe(document.getElementById("__root"));
+
+export const TheJsGuySwiper = () => {
+  const [lastSwipe, setLastSwipe] = useState("None");
+
+  const onSwipe = useCallback(
+    (e) => {
+      console.log("swipe");
+      setLastSwipe(e.detail.direction);
+    },
+    [lastSwipe]
+  );
+
+  const startSwiper = useCallback(() => {
+    swiper.startSwiper();
+  });
+
+  const stopSwiper = useCallback(() => {
+    swiper.stopSwiper();
+  });
+
+  useEffect(() => {
+    document.addEventListener("@thejsguy:swipe", onSwipe);
+
+    return () => document.removeEventListener("@thejsguy:swipe", onSwipe);
+  });
+
+  return (
+    <div>
+      <h1 className="text-2xl">Hello Swiper</h1>
+      <p className="mt-2 mb-2">
+        <span className="uppercase bg-purple-800 text-white px-2 py-2">{lastSwipe}</span>
+      </p>
+      <button
+        className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-10 px-6 rounded-lg dark:bg-indigo-600 dark:highlight-white/20 dark:hover:bg-indigo-400 mr-2"
+        onClick={startSwiper}
+      >
+        Start
+      </button>
+      <button
+        className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-10 px-6 rounded-lg dark:bg-red-500 dark:highlight-white/20 dark:hover:bg-red-400"
+        onClick={stopSwiper}
+      >
+        Stop
+      </button>
+    </div>
+  );
+};
+
+```
+
