@@ -141,6 +141,8 @@ const swiper = detectSwipe();
 export const TheJsGuySwiper = () => {
   const [lastSwipe, setLastSwipe] = useState("None");
   const [pointerLoc, setPointerLoc] = useState({ x: 0, y: 0 });
+  const [activeTab, setActiveTab] = useState(1);
+
   const swipeArea = useRef();
   const follower = useRef();
   const followerInitialPos = useRef();
@@ -154,10 +156,17 @@ export const TheJsGuySwiper = () => {
 
   const onSwipe = useCallback(
     (e) => {
+      if (e.detail.direction === "right" && activeTab > 1) {
+        setActiveTab(activeTab - 1);
+      }
+
+      if (e.detail.direction === "left" && activeTab < 3) {
+        setActiveTab(activeTab + 1);
+      }
       setLastSwipe(e.detail.direction);
       followerInitialPos.current = undefined;
     },
-    [lastSwipe]
+    [lastSwipe, activeTab]
   );
 
   const onSwiping = useCallback(
@@ -193,10 +202,40 @@ export const TheJsGuySwiper = () => {
           {lastSwipe}
         </span>
       </p>
-      <div className="w-100 bg-violet-300 h-96" ref={swipeArea}>
+      <div className="w-100 bg-violet-300 h-96">
         swipe on this area x: {pointerLoc.x} y: {pointerLoc.y}
         <br />
         swipe on this area dx: {pointerLoc.dx} dy: {pointerLoc.dy}
+        <div className="w-96 flex flex-row overflow-auto">
+          {[1, 2, 3].map((_) => (
+            <div
+              className={`border-b-2 border-cyan-700 mr-1 ${
+                (_ === activeTab && "bg-cyan-300") || ""
+              }`}
+              key={_}
+              onClick={() => setActiveTab(_)}
+            >
+              Tab {_}
+            </div>
+          ))}
+        </div>
+        <div className="w-96 flex flex-row overflow-x-hidden relative h-20" ref={swipeArea}>
+          {[1, 2, 3].map((_) => (
+            <div
+              className="min-w-full w-40 h-20 bg-red-300 absolute transition ease-in-out delay-150"
+              key={_}
+              style={{
+                ...(activeTab === _
+                  ? { transform: "translateX(0)" }
+                  : _ < activeTab
+                  ? { transform: "translateX(-100%)" }
+                  : { transform: "translateX(200%)" }),
+              }}
+            >
+              Tab Content {_}
+            </div>
+          ))}
+        </div>
       </div>
       <div
         ref={follower}
