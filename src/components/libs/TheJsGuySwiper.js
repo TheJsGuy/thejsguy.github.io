@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 
 const debounce = (callback, wait, immediate) => {
   let timeout;
@@ -21,7 +21,15 @@ const debounce = (callback, wait, immediate) => {
 const createSwipeEvent = (direction) =>
   new CustomEvent("@thejsguy:swipe", { detail: { direction } });
 
-const detectSwipe = (element) => {
+const createSwipingEvent = (detail) =>
+  new CustomEvent("@thejsguy:swiping", { detail });
+
+const TouchStatus = {
+  started: "@thejsguy:swiper:touchStarted",
+  ended: "@thejsguy:swiper:touchEnded",
+};
+
+const detectSwipe = () => {
   let detect = {
     startX: 0,
     startY: 0,
@@ -33,6 +41,8 @@ const detectSwipe = (element) => {
     maxY: 60, // max Y difference for horizontal swipe
   };
   let direction;
+  let element;
+  let touchStatus = TouchStatus.ended;
 
   let initialiseDetect = () => {
     detect = {
@@ -55,33 +65,54 @@ const detectSwipe = (element) => {
     document.dispatchEvent(createSwipeEvent(direction));
   }, 50);
 
-  const onTouchStart = (event) => {
-    const [touch] = event.touches;
-    detect.startX = touch.screenX;
-    detect.startY = touch.screenY;
-  };
+  const debouncedSwiping = debounce((event) => {
+    document.dispatchEvent(createSwipingEvent(event));
+  }, 5);
 
-  const onTouchMove = (event) => {
-    event.preventDefault();
-    const [touch] = event.touches;
-    detect.endX = touch.screenX;
-    detect.endY = touch.screenY;
-  };
-
-  const onTouchEnd = (event) => {
+  const getSwipeDirection = () => {
     if (
       // Horizontal move.
       Math.abs(detect.endX - detect.startX) > detect.minX &&
       Math.abs(detect.endY - detect.startY) < detect.maxY
     ) {
-      direction = detect.endX > detect.startX ? "right" : "left";
+      return detect.endX > detect.startX ? "right" : "left";
     } else if (
       // Vertical move.
       Math.abs(detect.endY - detect.startY) > detect.minY &&
       Math.abs(detect.endX - detect.startX) < detect.maxX
     ) {
-      direction = detect.endY > detect.startY ? "down" : "up";
+      return detect.endY > detect.startY ? "down" : "up";
     }
+  };
+
+  const onTouchStart = (event) => {
+    const [touch] = event.touches;
+    detect.startX = touch.screenX;
+    detect.startY = touch.screenY;
+    touchStatus = TouchStatus.started;
+  };
+
+  const onTouchMove = (event) => {
+    const [touch] = event.touches;
+    detect.endX = touch.screenX;
+    detect.endY = touch.screenY;
+    if (getSwipeDirection() === "left" || getSwipeDirection() === "right") {
+      event.preventDefault();
+    }
+
+    if (touchStatus === TouchStatus.started) {
+      debouncedSwiping({
+        x: touch.screenX,
+        y: touch.screenY,
+        dx: touch.screenX - detect.startX,
+        dy: touch.screenY - detect.startY,
+      });
+    }
+  };
+
+  const onTouchEnd = (event) => {
+    touchStatus = TouchStatus.ended;
+    direction = getSwipeDirection();
 
     if (direction && typeof debouncedCallback === "function") {
       debouncedCallback(direction);
@@ -89,7 +120,8 @@ const detectSwipe = (element) => {
   };
 
   return {
-    startSwiper: () => {
+    startSwiper: (el) => {
+      element = el;
       initialiseDetect();
       initialiseDirection();
       element.addEventListener("touchstart", onTouchStart);
@@ -104,21 +136,39 @@ const detectSwipe = (element) => {
   };
 };
 
-const swiper = detectSwipe(document.getElementById("__root"));
+const swiper = detectSwipe();
 
 export const TheJsGuySwiper = () => {
   const [lastSwipe, setLastSwipe] = useState("None");
+  const [pointerLoc, setPointerLoc] = useState({ x: 0, y: 0 });
+  const swipeArea = useRef();
+  const follower = useRef();
+  const followerInitialPos = useRef();
+
+  if (!followerInitialPos.current && follower.current) {
+    followerInitialPos.current = {
+      y: follower.current.offsetTop,
+      x: follower.current.offsetLeft,
+    };
+  }
 
   const onSwipe = useCallback(
     (e) => {
-      console.log("swipe");
       setLastSwipe(e.detail.direction);
+      followerInitialPos.current = undefined;
+    },
+    [lastSwipe]
+  );
+
+  const onSwiping = useCallback(
+    (e) => {
+      setPointerLoc(e.detail);
     },
     [lastSwipe]
   );
 
   const startSwiper = useCallback(() => {
-    swiper.startSwiper();
+    swiper.startSwiper(swipeArea.current);
   });
 
   const stopSwiper = useCallback(() => {
@@ -127,16 +177,38 @@ export const TheJsGuySwiper = () => {
 
   useEffect(() => {
     document.addEventListener("@thejsguy:swipe", onSwipe);
+    document.addEventListener("@thejsguy:swiping", onSwiping);
 
-    return () => document.removeEventListener("@thejsguy:swipe", onSwipe);
+    return () => {
+      document.removeEventListener("@thejsguy:swipe", onSwipe);
+      document.removeEventListener("@thejsguy:swiping", onSwiping);
+    };
   });
 
   return (
     <div>
       <h1 className="text-2xl">Hello Swiper</h1>
       <p className="mt-2 mb-2">
-        <span className="uppercase bg-purple-800 text-white px-2 py-2">{lastSwipe}</span>
+        <span className="uppercase bg-purple-800 text-white px-2 py-2">
+          {lastSwipe}
+        </span>
       </p>
+      <div className="w-100 bg-violet-300 h-96" ref={swipeArea}>
+        swipe on this area x: {pointerLoc.x} y: {pointerLoc.y}
+        <br />
+        swipe on this area dx: {pointerLoc.dx} dy: {pointerLoc.dy}
+      </div>
+      <div
+        ref={follower}
+        style={{
+          position: "fixed",
+          zIndex: "100",
+          ...(followerInitialPos.current && {
+            left: followerInitialPos.current.x + pointerLoc.dx,
+          }),
+        }}
+        className="w-5 h-5 bg-yellow-300 rounded-xl"
+      ></div>
       <button
         className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-10 px-6 rounded-lg dark:bg-indigo-600 dark:highlight-white/20 dark:hover:bg-indigo-400 mr-2"
         onClick={startSwiper}
