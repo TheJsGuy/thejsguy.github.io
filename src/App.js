@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import "./styles/output.css";
 import banner from "./banner.jpg";
 
@@ -71,7 +71,7 @@ const App = ({ config }) => {
   );
 };
 
-ReactDOM.render(
+render(
   <App config={window.config} />,
   document.getElementById("__root")
 );

@@ -993,6 +993,24 @@
   resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.5.tgz#2fe4df9d33eb6ce6d5178a0f862e97b61c01e27d"
   integrity sha512-UDMyLM2KavIu2vlWfMspapw9yii7aoLwzI2Hudx4fyoPwfKfxU8r3cL8dEBXOjcLG0/oOONZzbT14M1HoNtEcg==
 
+"@jridgewell/resolve-uri@^3.0.3":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-3.1.0.tgz#2203b118c157721addfe69d47b70465463066d78"
+  integrity sha512-F2msla3tad+Mfht5cJq7LSXcdudKTWCVYUgw6pLFOOHSTtZlj6SWNYAp+AhuqLmWdBO2X5hPrLcu8cVP8fy28w==
+
+"@jridgewell/sourcemap-codec@^1.4.10":
+  version "1.4.14"
+  resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.14.tgz#add4c98d341472a289190b424efbdb096991bb24"
+  integrity sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==
+
+"@jridgewell/trace-mapping@^0.3.7":
+  version "0.3.14"
+  resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.14.tgz#b231a081d8f66796e475ad588a1ef473112701ed"
+  integrity sha512-bJWEfQ9lPTvm3SneWwRFVLzrh6nhjwqw7TUFFBEMzwvg7t7PCDenf2lDwqo4NQXzdpgBXyFgDWnQA+2vkruksQ==
+  dependencies:
+    "@jridgewell/resolve-uri" "^3.0.3"
+    "@jridgewell/sourcemap-codec" "^1.4.10"
+
 "@mdx-js/loader@^1.6.22":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-1.6.22.tgz#d9e8fe7f8185ff13c9c8639c048b123e30d322c4"
@@ -1926,6 +1944,14 @@ compressible@~2.0.16:
   integrity sha512-AF3r7P5dWxL8MxyITRMlORQNaOA2IkAFaTr4k7BUumjPtRpGDTZpl0Pb1XCO6JeDCBdp126Cgs9sMxqSjgYyRg==
   dependencies:
     mime-db ">= 1.43.0 < 2"
+
+compression-webpack-plugin@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/compression-webpack-plugin/-/compression-webpack-plugin-10.0.0.tgz#3496af1b0dc792e13efc474498838dbff915c823"
+  integrity sha512-wLXLIBwpul/ALcm7Aj+69X0pYT3BYt6DdPn3qrgBIh9YejV9Bju9ShhlAsjujLyWMo6SAweFIWaUoFmXZNuNrg==
+  dependencies:
+    schema-utils "^4.0.0"
+    serialize-javascript "^6.0.0"
 
 compression@^1.7.4:
   version "1.7.4"
@@ -3215,6 +3241,15 @@ jest-worker@^27.4.1:
   version "27.4.5"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.4.5.tgz#d696e3e46ae0f24cff3fa7195ffba22889262242"
   integrity sha512-f2s8kEdy15cv9r7q4KkzGXvlY0JTcmCbMHZBfSQDwW77REr45IDWwd0lksDFeVHH2jJ5pqb90T77XscrjeGzzg==
+  dependencies:
+    "@types/node" "*"
+    merge-stream "^2.0.0"
+    supports-color "^8.0.0"
+
+jest-worker@^27.4.5:
+  version "27.5.1"
+  resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.5.1.tgz#8d146f0900e8973b106b6f73cc1e9a8cb86f8db0"
+  integrity sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==
   dependencies:
     "@types/node" "*"
     merge-stream "^2.0.0"
@@ -4712,6 +4747,17 @@ terser-webpack-plugin@^5.1.3:
     schema-utils "^3.1.1"
     serialize-javascript "^6.0.0"
     source-map "^0.6.1"
+    terser "^5.7.2"
+
+terser-webpack-plugin@^5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-5.3.3.tgz#8033db876dd5875487213e87c627bca323e5ed90"
+  integrity sha512-Fx60G5HNYknNTNQnzQ1VePRuu89ZVYWfjRAeT5rITuCY/1b08s49e5kSQwHDirKZWuoKOBRFS98EUUoZ9kLEwQ==
+  dependencies:
+    "@jridgewell/trace-mapping" "^0.3.7"
+    jest-worker "^27.4.5"
+    schema-utils "^3.1.1"
+    serialize-javascript "^6.0.0"
     terser "^5.7.2"
 
 terser@^5.10.0, terser@^5.7.2:
