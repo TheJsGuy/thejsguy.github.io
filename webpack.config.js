@@ -36,6 +36,14 @@ module.exports = {
                         options: {}
                     }
                 ]
+            },
+            {
+                test: /\.jpg?$/,
+                use: [
+                    {
+                        loader: 'file-loader'
+                    }
+                ]
             }
         ]
     },
