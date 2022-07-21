@@ -9,7 +9,7 @@
     "build": "webpack",
     "watch:css": "postcss --watch src/styles/tailwind.css -o src/styles/output.css",
     "build:css": "postcss src/styles/tailwind.css > src/styles/output.css",
-    "predeploy": "yarn build && cp dist/index.html dist/404.html",
+    "predeploy": "yarn build && cp dist/index.html dist/404.html && cp templates/googlef050191f458575da.html dist/googlef050191f458575da.html",
     "deploy": "gh-pages -d dist",
     "lint": "echo \"please setup lint\" "
   },
